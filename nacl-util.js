@@ -15,8 +15,9 @@
 
   function validateBase64(s) {
     // Webkit breaks regex test for large strings, attempt matching convertion instead
-    if(typeof webkit != 'undefined' && btoa(atob(s)) != s) {
-      throw new TypeError('invalid encoding');
+    if(typeof webkit != 'undefined') {
+      if(btoa(atob(s)) != s) 
+        throw new TypeError('invalid encoding');
     }
     // User regex for any other system
     else if (!(/^(?:[A-Za-z0-9+\/]{2}[A-Za-z0-9+\/]{2})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.test(s))) {
